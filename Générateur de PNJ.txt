@@ -1,0 +1,31 @@
+Générateur de PNJ
+L'objectif est de fournir une single page contient un formulaire avec les inputs suivantes :
+Radio : Friendly / Not friendly
+Select : Race ou null
+Radio : Homme/Femme/Aléatoire
+Bouton : Reset form
+Bouton : Envoi du formulaire
+
+Une fois envoyé, la requete est récupérée par PHP et va générer un personnage qui est affiché a l'écran.
+Il doit avoir les caractéristiques suivantes  :
+Nom
+Prénom
+Race
+Age
+Background (optionnel)
+Specs
+Agressivité
+Eloquence
+Honneur
+Intelligence
+
+Regles de gestion
+Chaque race est prédisposée a certaines specs, les orcs ont naturellement plus d'agressivité par exemple
+Les specs sont généré aléatoirements en prenant en compte les prédisposition des specs sur les races
+Obligation de gérer la logique métier par des objets
+
+Pistes
+Sont attendu des classes de type : PnjGenerator, Character ...
+Utilise l'héritage pour gérer les specs de chaques races
+Tu doit avoir littéralement une seule page generator.php et tout le code HTML + PHP doit etre à l'interieur. CE N'EST PAS UNE API HTTP 
+====
