@@ -12,7 +12,7 @@ class ElfNpc extends BaseNpc
         parent::__construct();
     }
 
-    public function setFirstName(): void
+    public function handleFirstName(): void
     {
         $femalefirstNames = ['Galadriel', 'Amarië', 'Miriel'];
         $malefirstNames = ['Turindo', 'Volondir', 'Vanyar'];
@@ -27,13 +27,13 @@ class ElfNpc extends BaseNpc
             $this->firstName = $femalefirstNames[$randomIndex];
         }
     }
-    public function setLastName(): void
+    public function handleLastName(): void
     {
         $lastNames = ['Elentári', 'Eluchíl', 'Lóteárë'];
         $randomIndex = array_rand($lastNames);
         $this->lastName = $lastNames[$randomIndex];
     }
-    public function setStats(): void
+    public function handleStats(): void
     {
         $statsNpc = new ElfStatsNpc();
         $this->stats = $statsNpc->getStats();

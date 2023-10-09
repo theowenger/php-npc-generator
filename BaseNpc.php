@@ -69,12 +69,12 @@ class BaseNpc
         }
         $npc->setRace($data['race']);
         $npc->setSex($data['sex']);
-        $npc->setBehavior($data['behavior']);
-        $npc->setFirstName();
-        $npc->setLastName();
-        $npc->setStats();
-        $npc->setAgressivite();
-        $npc->setHonnor();
+        $npc->handleBehavior($data['behavior']);
+        $npc->handleFirstName();
+        $npc->handleLastName();
+        $npc->handleStats();
+        $npc->handleAgressivite();
+        $npc->handleHonnor();
         $npc->setAge($npc->getRandomAge());
 
         return $npc;
@@ -82,13 +82,13 @@ class BaseNpc
 
 
 
-    public function setLastName(): void
+    public function handleLastName(): void
     {
         $lastNames = ['barbouz', 'madala', 'gravel'];
         $randomIndex = array_rand($lastNames);
         $this->lastName = $lastNames[$randomIndex];
     }
-    public function setBehavior(string $behavior): void
+    public function handleBehavior(string $behavior): void
     {
         $behaviors = ['friendly', 'hostile'];
         if ($behavior === "random") {
@@ -98,7 +98,7 @@ class BaseNpc
 
         $this->behavior = $behavior;
     }
-    public function setFirstName(): void
+    public function handleFirstName(): void
     {
         $femalefirstNames = ['lucie', 'judith', 'zoé'];
         $malefirstNames = ['john', 'jack', 'bruno'];
@@ -119,18 +119,18 @@ class BaseNpc
     {
         $this->sex = $sex;
     }
-    public function setStats(): void
+    public function handleStats(): void
     {
         $statsNpc = new StatsNpc();
         $this->stats = $statsNpc->getStats();
     }
-    public function setAgressivite(): void
+    public function handleAgressivite(): void
     {
         $arrayAgressivite = ['Hostile', 'Bienveillant', 'Agressif', 'Arrogant', 'Ambitieux', 'Attentioné', 'Associal', 'Desagréable', 'Blagueur', 'Timide'];
         $randomIndex = array_rand($arrayAgressivite);
         $this->agressivite = $arrayAgressivite[$randomIndex];
     }
-    public function setHonnor(): void
+    public function handleHonnor(): void
     {
         $arrayHonor = ['Misereux', 'Sans le sous', 'Travailleur honnete', 'Riche', 'Noble', 'Marginal'];
         $randomIndex = array_rand($arrayHonor);

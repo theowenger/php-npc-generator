@@ -26,12 +26,10 @@
                     <label for="friendly">Aleatoire</label>
 
 
-                    <input type="radio" name="behavior" value="friendly"
-                        <?php if (isset($_POST['behavior']) && $_POST['behavior'] == 'friendly') echo 'checked'; ?> />
+                    <input type="radio" name="behavior" value="friendly" <?php if (isset($_POST['behavior']) && $_POST['behavior'] == 'friendly') echo 'checked'; ?> />
                     <label for="friendly">amicale</label>
 
-                    <input type="radio" name="behavior" value="hostile"
-                        <?php if (isset($_POST['behavior']) && $_POST['behavior'] == 'hostile') echo 'checked'; ?> />
+                    <input type="radio" name="behavior" value="hostile" <?php if (isset($_POST['behavior']) && $_POST['behavior'] == 'hostile') echo 'checked'; ?> />
                     <label for="hostile">hostile</label>
 
                 </fieldset>
@@ -40,19 +38,15 @@
                     <legend>Race du pnj:</legend>
                     <label for="race-select"></label>
                     <select name="race" id="race-select">
-                        <option value="random"
-                            <?php if(isset($_POST['race']) && $_POST['race'] == 'random') echo 'selected'; ?>>Aleatoire
+                        <option value="random" <?php if (isset($_POST['race']) && $_POST['race'] == 'random') echo 'selected'; ?>>Aleatoire
                         </option>
-                        <option value="human"
-                            <?php if(isset($_POST['race']) && $_POST['race'] == 'human') echo 'selected'; ?>>Humain
+                        <option value="human" <?php if (isset($_POST['race']) && $_POST['race'] == 'human') echo 'selected'; ?>>Humain
                         </option>
-                        <option value="elf"
-                            <?php if(isset($_POST['race']) && $_POST['race'] == 'elf') echo 'selected'; ?>>Elfe</option>
-                        <option value="dwarf"
-                            <?php if(isset($_POST['race']) && $_POST['race'] == 'dwarf') echo 'selected'; ?>>Nain
+                        <option value="elf" <?php if (isset($_POST['race']) && $_POST['race'] == 'elf') echo 'selected'; ?>>Elfe
                         </option>
-                        <option value="orc"
-                            <?php if(isset($_POST['race']) && $_POST['race'] == 'orc') echo 'selected'; ?>>Orc</option>
+                        <option value="dwarf" <?php if (isset($_POST['race']) && $_POST['race'] == 'dwarf') echo 'selected'; ?>>Nain
+                        </option>
+                        <option value="orc" <?php if (isset($_POST['race']) && $_POST['race'] == 'orc') echo 'selected'; ?>>Orc</option>
                     </select>
                 </fieldset>
 
@@ -66,21 +60,19 @@
                     </div>
 
                     <div>
-                        <input type="radio" name="sex" value="woman"
-                            <?php if (isset($_POST['behavior']) && $_POST['sex'] == 'woman') echo 'checked'; ?> />
+                        <input type="radio" name="sex" value="woman" <?php if (isset($_POST['behavior']) && $_POST['sex'] == 'woman') echo 'checked'; ?> />
                         <label for="sex">Femme</label>
                     </div>
 
                     <div>
-                        <input type="radio" name="sex" value="man"
-                            <?php if (isset($_POST['behavior']) && $_POST['sex'] == 'man') echo 'checked'; ?> />
+                        <input type="radio" name="sex" value="man" <?php if (isset($_POST['behavior']) && $_POST['sex'] == 'man') echo 'checked'; ?> />
                         <label for="sex">Homme</label>
                     </div>
                 </fieldset>
 
             </div>
             <div class="submit-container">
-                <button type="reset">Reinitialiser</button>
+                <button type="reset" onclick="resetForm()">Reinitialiser</button>
                 <button type="submit">Valider</button>
             </div>
         </form>
@@ -105,6 +97,11 @@
     <footer>
 
     </footer>
+    <script>
+        function resetForm() {
+
+        }
+    </script>
 </body>
 
 </html>

@@ -12,7 +12,7 @@ class DwarfNpc extends BaseNpc
         parent::__construct();
     }
 
-    public function setFirstName(): void
+    public function handleFirstName(): void
     {
         $femalefirstNames = ['Kratdrolin ', 'Hukwobera', 'Webolydd'];
         $malefirstNames = ['Thrarurim', 'Darat', 'Hogheas'];
@@ -27,13 +27,13 @@ class DwarfNpc extends BaseNpc
             $this->firstName = $femalefirstNames[$randomIndex];
         }
     }
-    public function setLastName(): void
+    public function handleLastName(): void
     {
         $lastNames = ['Au bras de marbre', ' Au derrière Profond', 'Faiseur des Mines'];
         $randomIndex = array_rand($lastNames);
         $this->lastName = $lastNames[$randomIndex];
     }
-    public function setStats(): void
+    public function handleStats(): void
     {
         $statsNpc = new DwarfStatsNpc();
         $this->stats = $statsNpc->getStats();

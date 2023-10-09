@@ -12,7 +12,7 @@ class OrcNpc extends BaseNpc
         parent::__construct();
     }
 
-    public function setFirstName(): void
+    public function handleFirstName(): void
     {
         $femalefirstNames = ['Gomoku', 'Mughragh', 'Hagu '];
         $malefirstNames = ['Morlag', 'Uloth', 'Rulfim'];
@@ -27,13 +27,13 @@ class OrcNpc extends BaseNpc
             $this->firstName = $femalefirstNames[$randomIndex];
         }
     }
-    public function setLastName(): void
+    public function handleLastName(): void
     {
         $lastNames = ['Kuul', 'Zrag', 'Gourga'];
         $randomIndex = array_rand($lastNames);
         $this->lastName = $lastNames[$randomIndex];
     }
-    public function setStats(): void
+    public function handleStats(): void
     {
         $statsNpc = new OrcStatsNpc();
         $this->stats = $statsNpc->getStats();
