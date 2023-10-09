@@ -1,8 +1,8 @@
 <?php
 
-require './ElfStatsNpc.php';
+require './DwarfStatsNpc.php';
 
-class ElfNpc extends BaseNpc
+class DwarfNpc extends BaseNpc
 {
     protected string $firstName;
     protected string $lastName;
@@ -14,8 +14,8 @@ class ElfNpc extends BaseNpc
 
     public function setFirstName(): void
     {
-        $femalefirstNames = ['Galadriel', 'Amarië', 'Miriel'];
-        $malefirstNames = ['Turindo', 'Volondir', 'Vanyar'];
+        $femalefirstNames = ['Kratdrolin ', 'Hukwobera', 'Webolydd'];
+        $malefirstNames = ['Thrarurim', 'Darat', 'Hogheas'];
 
         $sex = $this->getSex();
 
@@ -29,13 +29,13 @@ class ElfNpc extends BaseNpc
     }
     public function setLastName(): void
     {
-        $lastNames = ['Elentári', 'Eluchíl', 'Lóteárë'];
+        $lastNames = ['Au bras de marbre', ' Au derrière Profond', 'Faiseur des Mines'];
         $randomIndex = array_rand($lastNames);
         $this->lastName = $lastNames[$randomIndex];
     }
     public function setStats(): void
     {
-        $statsNpc = new ElfStatsNpc();
+        $statsNpc = new DwarfStatsNpc();
         $this->stats = $statsNpc->getStats();
     }
     public function getFirstName()

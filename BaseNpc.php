@@ -1,16 +1,19 @@
 <?php
 
+require './StatsNpc.php';
+require './ElfNpc.php';
+require './OrcNpc.php';
+require './DwarfNpc.php';
+
 class BaseNpc
 {
-    private array $firstNames = ['john', 'jack', 'bruno'];
-    private array $lastNames = ['barbouz', 'madala', 'gravel'];
     private string $firstName;
     private string $lastName;
     private string $behavior;
     private string $race;
     private int $age;
     private string $sex;
-    private array $stats;
+    protected array $stats = [];
     private string $agressivite;
     private string $honor;
 
@@ -18,35 +21,72 @@ class BaseNpc
     {
     }
 
+    private static function _selectRace(array &$data)
+    {
+        $races = ['human', 'elf', 'dwarf', 'orc'];
+        $race = $data['race'];
+        if ($race === 'random') {
+            $randomIndex = array_rand($races);
+            $data['race'] = $races[$randomIndex];
+        }
+    }
+    private static function _selectSex(array &$data)
+    {
+        $sexs = ['Homme', 'Femme'];
+        switch ($data['sex']) {
+            case 'random':
+                $randomIndex = array_rand($sexs);
+                $data['sex'] = $sexs[$randomIndex];
+                break;
+            case 'man':
+                $data['sex'] = 'Homme';
+                break;
+            case 'woman':
+                $data['sex'] = 'Femme';
+                break;
+        }
+    }
+
+
     public static function getInstance(array $data): self
     {
-        $npc = new self(); // Crée une nouvelle instance de BaseNpc
+        self::_selectRace($data);
+        self::_selectSex($data);
 
-        // Utilisez les méthodes internes pour initialiser les propriétés
-        $npc->setFirstName();
-        $npc->setLastName();
-        $npc->setBehavior($data['behavior']);
+        $race = $data['race'];
+        switch ($race) {
+            case 'elf':
+                $npc = new ElfNpc();
+                break;
+            case 'dwarf':
+                $npc = new DwarfNpc();
+                break;
+            case 'orc':
+                $npc = new OrcNpc();
+                break;
+            default:
+                $npc = new BaseNpc();
+        }
         $npc->setRace($data['race']);
         $npc->setSex($data['sex']);
+        $npc->setBehavior($data['behavior']);
+        $npc->setFirstName();
+        $npc->setLastName();
         $npc->setStats();
         $npc->setAgressivite();
         $npc->setHonnor();
         $npc->setAge($npc->getRandomAge());
 
-        // var_dump($npc);
         return $npc;
     }
 
-    public function setFirstName(): void
-    {
-        $randomIndex = array_rand($this->firstNames);
-        $this->firstName = $this->firstNames[$randomIndex];
-    }
+
 
     public function setLastName(): void
     {
-        $randomIndex = array_rand($this->lastNames);
-        $this->lastName = $this->lastNames[$randomIndex];
+        $lastNames = ['barbouz', 'madala', 'gravel'];
+        $randomIndex = array_rand($lastNames);
+        $this->lastName = $lastNames[$randomIndex];
     }
     public function setBehavior(string $behavior): void
     {
@@ -58,62 +98,43 @@ class BaseNpc
 
         $this->behavior = $behavior;
     }
+    public function setFirstName(): void
+    {
+        $femalefirstNames = ['lucie', 'judith', 'zoé'];
+        $malefirstNames = ['john', 'jack', 'bruno'];
+
+        if ($this->sex === 'Homme') {
+            $randomIndex = array_rand($malefirstNames);
+            $this->firstName = $malefirstNames[$randomIndex];
+        } elseif ($this->sex === 'Femme') {
+            $randomIndex = array_rand($femalefirstNames);
+            $this->firstName = $femalefirstNames[$randomIndex];
+        }
+    }
     public function setRace(string $race): void
     {
-        require './ElfNpc.php';
-        $races = ['human', 'elf', 'dwarf', 'orc'];
-        switch ($race) {
-            case 'random':
-                $randomIndex = array_rand($races);
-                $race = $races[$randomIndex];
-                break;
-            case 'human':
-                $race = 'Humain';
-                break;
-            case 'elf':
-                $race = 'Elfe';
-                $elfNpc = new ElfNpc();
-                var_dump($elfNpc);
-                break;
-            case 'dwarf':
-                $race = 'Nain';
-                break;
-            case 'orc':
-                $race = 'Orc';
-                break;
-        }
         $this->race = $race;
     }
     public function setSex(string $sex): void
     {
-        $sexs = ['Homme', 'Femme'];
-        switch ($sex) {
-            case 'random':
-                $randomIndex = array_rand($sexs);
-                $sex = $sexs[$randomIndex];
-                break;
-            case 'man':
-                $sex = 'Homme';
-                break;
-            case 'woman':
-                $sex = 'Femme';
-                break;
-        }
         $this->sex = $sex;
     }
     public function setStats(): void
     {
-        require './StatsNpc.php';
         $statsNpc = new StatsNpc();
         $this->stats = $statsNpc->getStats();
     }
     public function setAgressivite(): void
     {
-        $this->agressivite = 'mechant';
+        $arrayAgressivite = ['Hostile', 'Bienveillant', 'Agressif', 'Arrogant', 'Ambitieux', 'Attentioné', 'Associal', 'Desagréable', 'Blagueur', 'Timide'];
+        $randomIndex = array_rand($arrayAgressivite);
+        $this->agressivite = $arrayAgressivite[$randomIndex];
     }
     public function setHonnor(): void
     {
-        $this->honor = 'vertueux';
+        $arrayHonor = ['Misereux', 'Sans le sous', 'Travailleur honnete', 'Riche', 'Noble', 'Marginal'];
+        $randomIndex = array_rand($arrayHonor);
+        $this->honor = $arrayHonor[$randomIndex];
     }
 
     public function setAge(int $age): void
@@ -127,57 +148,55 @@ class BaseNpc
 
     public function getFirstName()
     {
-        return '<p>Prenom : ' .  $this->firstName . '</p>';
+        return $this->firstName;
     }
+
     public function getLastName()
     {
-        return '<p>Nom : ' .  $this->lastName . '</p>';
+        return $this->lastName;
     }
     public function getAge()
     {
-        return '<p>Age : ' .  $this->age . '</p>';
+        return $this->age;
     }
     public function getBehavior()
     {
-        return '<p>Attitude : ' .  $this->behavior . '</p>';
+        return $this->behavior;
     }
     public function getRace()
     {
-        return '<p>Race : ' .  $this->race . '</p>';
+        return $this->race;
     }
     public function getSex()
     {
-        return '<p>Sexe : ' .  $this->sex . '</p>';
+        return $this->sex;
     }
     public function getStats()
     {
-        $result = '<p>Statistiques : </p>';
-
-        foreach ($this->stats as $statName => $statValue) {
-            $result .= '<p>' . $statName . ': ' . $statValue . '</p>';
-        }
-
-        return $result;
+        return $this->stats;
     }
     public function getAgressivite()
     {
-        return '<p>Agressivité : ' .  $this->agressivite . '</p>';
+        return $this->agressivite;
     }
     public function getHonor()
     {
-        return '<p>Honneur : ' .  $this->honor . '</p>';
+        return  $this->honor;
     }
     public function getAll()
     {
-        $info = $this->getFirstName();
-        $info .= $this->getLastName();
-        $info .= $this->getAge();
-        $info .= $this->getBehavior();
-        $info .= $this->getRace();
-        $info .= $this->getSex();
-        $info .= $this->getAgressivite();
-        $info .= $this->getHonor();
-        $info .= $this->getStats();
+        $info = '<p>' . $this->getFirstName() . '</p>';
+        $info .= '<p>' . $this->getLastName() . '</p>';
+        $info .= '<p>' . $this->getAge() . '</p>';
+        $info .= '<p>' . $this->getBehavior() . '</p>';
+        $info .= '<p>' . $this->getRace() . '</p>';
+        $info .= '<p>' . $this->getSex() . '</p>';
+        $info .= '<p>' . $this->getAgressivite() . '</p>';
+        $info .= '<p>' . $this->getHonor() . '</p>';
+        $info .= '<p>Stats:</p>';
+        foreach ($this->stats as $statName => $statValue) {
+            $info .= '<p>' . $statName . ': ' . $statValue . '</p>';
+        }
         return  $info;
     }
 }

@@ -26,27 +26,36 @@
                     <label for="friendly">Aleatoire</label>
 
 
-                    <input type="radio" name="behavior" value="friendly" />
+                    <input type="radio" name="behavior" value="friendly"
+                        <?php if (isset($_POST['behavior']) && $_POST['behavior'] == 'friendly') echo 'checked'; ?> />
                     <label for="friendly">amicale</label>
 
-                    <input type="radio" name="behavior" value="hostile" />
+                    <input type="radio" name="behavior" value="hostile"
+                        <?php if (isset($_POST['behavior']) && $_POST['behavior'] == 'hostile') echo 'checked'; ?> />
                     <label for="hostile">hostile</label>
 
                 </fieldset>
 
                 <fieldset class="choice-container race-container">
                     <legend>Race du pnj:</legend>
-
                     <label for="race-select"></label>
-
                     <select name="race" id="race-select">
-                        <option value="random">Aleatoire</option>
-                        <option value="human">Humain</option>
-                        <option value="elf">Elfe</option>
-                        <option value="dwarf">Nain</option>
-                        <option value="orc">Orc</option>
+                        <option value="random"
+                            <?php if(isset($_POST['race']) && $_POST['race'] == 'random') echo 'selected'; ?>>Aleatoire
+                        </option>
+                        <option value="human"
+                            <?php if(isset($_POST['race']) && $_POST['race'] == 'human') echo 'selected'; ?>>Humain
+                        </option>
+                        <option value="elf"
+                            <?php if(isset($_POST['race']) && $_POST['race'] == 'elf') echo 'selected'; ?>>Elfe</option>
+                        <option value="dwarf"
+                            <?php if(isset($_POST['race']) && $_POST['race'] == 'dwarf') echo 'selected'; ?>>Nain
+                        </option>
+                        <option value="orc"
+                            <?php if(isset($_POST['race']) && $_POST['race'] == 'orc') echo 'selected'; ?>>Orc</option>
                     </select>
                 </fieldset>
+
 
                 <fieldset class="choice-container sex-container">
                     <legend>Sexe pnj:</legend>
@@ -57,12 +66,14 @@
                     </div>
 
                     <div>
-                        <input type="radio" name="sex" value="woman" />
+                        <input type="radio" name="sex" value="woman"
+                            <?php if (isset($_POST['behavior']) && $_POST['sex'] == 'woman') echo 'checked'; ?> />
                         <label for="sex">Femme</label>
                     </div>
 
                     <div>
-                        <input type="radio" name="sex" value="man" />
+                        <input type="radio" name="sex" value="man"
+                            <?php if (isset($_POST['behavior']) && $_POST['sex'] == 'man') echo 'checked'; ?> />
                         <label for="sex">Homme</label>
                     </div>
                 </fieldset>

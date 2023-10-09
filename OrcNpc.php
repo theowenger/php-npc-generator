@@ -1,8 +1,8 @@
 <?php
 
-require './ElfStatsNpc.php';
+require './OrcStatsNpc.php';
 
-class ElfNpc extends BaseNpc
+class OrcNpc extends BaseNpc
 {
     protected string $firstName;
     protected string $lastName;
@@ -14,8 +14,8 @@ class ElfNpc extends BaseNpc
 
     public function setFirstName(): void
     {
-        $femalefirstNames = ['Galadriel', 'Amarië', 'Miriel'];
-        $malefirstNames = ['Turindo', 'Volondir', 'Vanyar'];
+        $femalefirstNames = ['Gomoku', 'Mughragh', 'Hagu '];
+        $malefirstNames = ['Morlag', 'Uloth', 'Rulfim'];
 
         $sex = $this->getSex();
 
@@ -29,13 +29,13 @@ class ElfNpc extends BaseNpc
     }
     public function setLastName(): void
     {
-        $lastNames = ['Elentári', 'Eluchíl', 'Lóteárë'];
+        $lastNames = ['Kuul', 'Zrag', 'Gourga'];
         $randomIndex = array_rand($lastNames);
         $this->lastName = $lastNames[$randomIndex];
     }
     public function setStats(): void
     {
-        $statsNpc = new ElfStatsNpc();
+        $statsNpc = new OrcStatsNpc();
         $this->stats = $statsNpc->getStats();
     }
     public function getFirstName()
@@ -53,6 +53,6 @@ class ElfNpc extends BaseNpc
 
     public function getRandomAge(): int
     {
-        return rand(50, 1000);
+        return rand(12, 60);
     }
 }
